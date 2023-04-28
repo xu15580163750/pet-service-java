@@ -1,0 +1,54 @@
+server:
+  port: 7007
+  error:
+    include-exception: true
+  compression:
+    enabled: true
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain,application/javascript,text/css
+    min-response-size: 1024
+
+
+logging:
+  level:
+    root: warn
+    com.xu: debug
+  pattern:
+    console: "%black(%d{ISO8601}) %highlight(%-5level) [%blue(%X{traceId})] [%blue(%+4X{userId})] [%t] %yellow(%c{1.}): %msg%n%throwable"
+
+spring:
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  main:
+    allow-bean-definition-overriding: true
+
+  datasource:
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+    url: jdbc:p6spy:mysql://localhost:3306/pet_help?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true
+    username: root
+    password: 1234
+
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: env
+#  redis:
+#    host: redis.dev.bluexii.cn
+#  cache:
+#      type: redis
+
+
+
+
+
+
+
