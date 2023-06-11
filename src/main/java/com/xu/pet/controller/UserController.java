@@ -91,7 +91,7 @@ public class UserController {
      */
     @ApiOperation(value = "详细")
     @PostMapping("/admin/content/info")
-    public UserDetailResponse detail(@RequestBody @Valid  UserDetailRequest req) {
+    public UserDetailResponse detail(@RequestBody @Valid UserDetailRequest req) {
 
         UserDetailResponse detail = userService.detail(req);
         return detail;
@@ -164,8 +164,12 @@ public class UserController {
 
     @PutMapping("/admin/user")
     public Result editUser(@RequestBody @Valid UserModifyRequest request) {
-        userService.modify(request);
-        return ResultFactory.buildSuccessResult("修改用户信息成功");
+        if (userService.modify(request)) {
+            return ResultFactory.buildSuccessResult("修改用户信息成功");
+        } else {
+            return ResultFactory.buildFailResult("修改用户信息失败");
+        }
+
     }
 
 
@@ -185,6 +189,7 @@ public class UserController {
         }
         return ResultFactory.buildSuccessResult("密码修改成功");
     }
+
 
 
 }

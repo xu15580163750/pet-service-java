@@ -91,9 +91,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             return 0;
         }
 
-        //验证用户是否已存在
+        //验证用户是否已存在(未删除的启用用户中查找)
         boolean exist = exist(UserListRequest.builder()
                 .username(req.getUsername())
+                .delete_(false)
+                .enabled(true)
                 .build());
         if (exist) {
             return 2;
@@ -108,6 +110,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         if (null == user.getId() || user.getId() <= 0) {
             return 4;
         }
+        //创建成功后分配用户权限
+        userRoleService.create(SysUserRoleCreateRequest.builder().userId(user.getId()).roleId(3L).build());
         return 1;
 
     }
@@ -192,7 +196,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 //        }
 
 
+        req.setId(record.getId());
         User user = mappingService.map(req, User.class);
+
 
         return userMapper.updateById(user) > 0;
 

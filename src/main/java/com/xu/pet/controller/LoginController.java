@@ -40,6 +40,7 @@ public class LoginController {
         UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username, req.getPassword());
         try {
             UserDetailResponse userDetailResponse = userService.detail(UserDetailRequest.builder()
+                    .delete_(false)
                     .username(username)
                     .build());
             if (null == userDetailResponse || null == userDetailResponse.getId()) {

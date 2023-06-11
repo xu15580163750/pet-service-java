@@ -12,10 +12,11 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
-* 用户管理创建
-* @author xuqingf
-* @since 2023-03-21
-*/
+ * 用户管理创建
+ *
+ * @author xuqingf
+ * @since 2023-03-21
+ */
 @Data
 @Accessors(chain = true)
 @Builder(toBuilder = true)
@@ -23,7 +24,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 //@ApiModel(value = "用户管理", description = "用户管理创建")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class UserDetailRequest implements Serializable{
+public class UserDetailRequest implements Serializable {
     private static final long serialVersionUID = 1L;
 
 
@@ -74,6 +75,13 @@ public class UserDetailRequest implements Serializable{
      */
     @ApiModelProperty(value = "使用状态：0停用；1启用")
     private Boolean enabled;
+
+
+    /**
+     * 用户是否删除：0已删除；1未删除
+     */
+    @ApiModelProperty(value = "用户是否删除：0已删除；1未删除")
+    private Boolean delete_;
 
     /**
      * 版本号

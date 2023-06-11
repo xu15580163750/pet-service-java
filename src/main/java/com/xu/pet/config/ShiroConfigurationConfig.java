@@ -24,7 +24,7 @@ import java.util.Map;
  * @date 2023/3
  */
 @Configuration
-public class ShiroConfiguration {
+public class ShiroConfigurationConfig {
     @Bean
     public static LifecycleBeanPostProcessor getLifecycleBeanProcessor() {
         return new LifecycleBeanPostProcessor();

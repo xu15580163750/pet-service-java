@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  * @date 2023/3
  */
 @SpringBootConfiguration
-public class WebConfigurer implements WebMvcConfigurer, HandlerInterceptor {
+public class WebConfig implements WebMvcConfigurer, HandlerInterceptor {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
